@@ -1,8 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import pp from "../assets/pp.jpg";
+import { BM } from "../context/bookmark";
 export const Post = ({ post }) => {
   const [mark, setMark] = useState(true);
+  const book = useContext(BM);
 
+  function bookmark(data) {
+    book.setBookmark((pre) => [...pre, data]);
+  }
+  function removeBookmark(data) {
+    book.setBookmark(book.bookmark.filter((item) => item.id !== data.id));
+  }
   return (
     <>
       <section className="max-w-[500px] p-4 border-2 rounded-xl shadow-lg">
@@ -34,7 +42,10 @@ export const Post = ({ post }) => {
                   strokeWidth="1.5"
                   stroke="currentColor"
                   className="size-6"
-                  onClick={() => setMark(false)}
+                  onClick={() => {
+                    setMark(false);
+                    bookmark(post);
+                  }}
                 >
                   <path
                     strokeLinecap="round"
@@ -48,7 +59,10 @@ export const Post = ({ post }) => {
                   viewBox="0 0 24 24"
                   fill="currentColor"
                   className="size-6"
-                  onClick={() => setMark(true)}
+                  onClick={() => {
+                    setMark(true);
+                    removeBookmark(post);
+                  }}
                 >
                   <path
                     fillRule="evenodd"

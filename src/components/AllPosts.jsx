@@ -3,11 +3,12 @@ import { Post } from "./Post";
 
 export const AllPosts = () => {
   const [allData, setAllData] = useState([]);
+
   useEffect(() => {
-    fetch("http://localhost:3000/posts")
+    fetch("data.json")
       .then((res) => res.json())
       .then((data) => {
-        setAllData(data);
+        setAllData(data.posts);
       });
   }, []);
 

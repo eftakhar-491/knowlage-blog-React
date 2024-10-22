@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Nav } from "./components/Nav";
 import { AllPosts } from "./components/AllPosts";
 import { SpendTime } from "./components/SpendTime";
 import { AllBookMarks } from "./components/AllBookMarks";
+import { BM } from "./context/bookmark";
 
 export const Layout = () => {
+  const [bookmark, setBookmark] = useState([]);
   return (
-    <>
+    <BM.Provider value={{ bookmark, setBookmark }}>
       <section>
         <header className="max-w-[1440px] mx-auto">
           <Nav />
@@ -21,6 +23,6 @@ export const Layout = () => {
           </section>
         </main>
       </section>
-    </>
+    </BM.Provider>
   );
 };
